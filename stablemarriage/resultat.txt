@@ -1,0 +1,23 @@
+Innan skifte till deque
+time python3 Main.py < data/secret/4testhuge.in 
+real    2m30,551s
+user    2m29,190s
+sys     0m0,333s
+
+Av dessa tar createlists() ca 2m20s
+
+Efter omskriven mapInvert, skifte till deque hade ingen skillnad:
+real    0m3,831s
+user    0m3,618s
+sys     0m0,204s
+
+
+Körning av hela testsviten.
+real    0m24,184s
+user    0m21,848s
+sys     0m2,096s
+
+Körning med Isaks lösning.
+real    0m24,489s
+user    0m22,056s
+sys     0m2,315s
