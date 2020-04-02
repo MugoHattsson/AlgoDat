@@ -1,13 +1,10 @@
-\documentclass{article}
-\usepackage{amsmath}
-\usepackage[utf8]{inputenc}
 \usepackage{booktabs}
 \usepackage{microtype}
 \usepackage[colorinlistoftodos]{todonotes}
 \pagestyle{empty}
 
 \title{Stable Matching Report}
-\author{Author 1 and Author 2}
+\author{Hugo Mattsson hu5174ma-s \&\& \\ Clemens Christierson cl4548ch-s}
 
 \begin{document}
   \maketitle
@@ -15,9 +12,14 @@
   \section{Results}
 
   \todo[inline]{Briefly comment the results, did the script say all your solutions were correct? Approximately how long time does it take for the program to run on the largest input? What takes the majority of the time?}
+  
+  Checksolution finishes in about 23s with output being correct for all of the supplied in-files. Running our program using "5testhugemessy.in" takes just under 4s to finish. 90\% of this time taken up to parse the input and fill the datastructures being used by the actual algorithm.
 
   \section{Implementation details}
 
   \todo[inline]{How did you implement the solution? Which data structures were used? Which modifications to these data structures were used? What is the overall running time? Why?}
+  
+  The algorithm was implemented using python where we created two classes, Man \&\& Woman, with some helper functions. All men were initially placed in a deque and the women were placed in a dictionary with their id being the key. 
+  When the algorithm finds a match the man gets removed from the deque and is stored as an attribute within the woman whom he marries. If they break up the man gets put back into the deque. 
 
 \end{document}
