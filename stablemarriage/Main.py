@@ -55,6 +55,7 @@ class Woman:
         self.marriedTo = man
         return oldHusband
 
+    # Returns True if the woman want's to break up with her current partner.
     def changeHusband(self, new):
         return self.prefList[new -1] < self.prefList[self.marriedTo.identifier-1]
 
