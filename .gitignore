@@ -1,1 +1,3 @@
 /stablemarriage/__pycache__/
+/stablemarriage/**/*.out
+/stablemarriage/**/*.verd
