@@ -1,6 +1,6 @@
 # Global ignores
 /**/__pycache__/
+/**/*.out
+/**/*.verd
 
 # Local ignores
-/stablemarriage/**/*.out
-/stablemarriage/**/*.verd
