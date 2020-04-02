@@ -71,10 +71,10 @@ def createLists():
         if identifier in womenList:
             menList.append(Man(identifier, deque(prefList)))
         else:
-            womenList[identifier] = Woman(identifier, deque(mapInverse(prefList)))
+            womenList[identifier] = Woman(identifier, deque(invertList(prefList)))
 
 
-def mapInverse(list):
+def invertList(list):
     resultList = [0] * N
     for i, v in enumerate(list):
         resultList[v-1] = i
