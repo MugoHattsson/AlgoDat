@@ -32,8 +32,7 @@ class Node:
         return isinstance(obj, Node) and obj.word == self.word
 
     def findConnected(self):
-        for node in nodes:
-            currentNode = nodes[node]
+        for currentNode in nodes.values():
             if currentNode != self and self.contains(currentNode.word):
                 self.connected.append(currentNode)
 
@@ -45,8 +44,8 @@ class Node:
         return True
 
 def resetNodes():
-    for node in nodes:
-        nodes[node].visited = False
+    for node in nodes.values():
+        node.visited = False
 
 
 def bfs(start, end):
@@ -80,8 +79,8 @@ def createGraph():
         word = sys.stdin.readline().rstrip()
         nodes[word] = Node(word)
 
-    for node in nodes:
-        nodes[node].findConnected()
+    for node in nodes.values():
+        node.findConnected()
 
 
 if __name__ == '__main__':
