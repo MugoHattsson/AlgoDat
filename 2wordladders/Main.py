@@ -1,5 +1,5 @@
 import sys
-import queue
+import collections
 
 nodes: dict = {}
 LINE = sys.stdin.readline().split(' ')
@@ -48,21 +48,22 @@ def resetNodes():
     for node in nodes:
         nodes[node].visited = False
 
+
 def bfs(start, end):
     if start == end:
         print(0)
         return
-    currentNodes = queue.Queue()
-    currentNodes.put(start)
+    currentNodes = collections.deque()
+    currentNodes.append(start)
     start.visited = True
     start.pred = None
 
-    while not currentNodes.empty():
-        current = currentNodes.get()
+    while len(currentNodes) != 0:
+        current = currentNodes.popleft()
         for neighbour in current.connected:
             if not neighbour.visited:
                 neighbour.visited = True
-                currentNodes.put(neighbour)
+                currentNodes.append(neighbour)
                 neighbour.pred = current
                 if neighbour == end:
                     print(pathLength(neighbour))
