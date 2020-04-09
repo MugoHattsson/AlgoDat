@@ -15,9 +15,16 @@
   \section{Results}
 
   \todo[inline]{Briefly comment the results, did the script say all your solutions were correct? Approximately how long time does it take for the program to run on the largest input? What takes the majority of the time?}
+  
+  All result come back as correct. The algorithm takes 24s to compute using "5large1.in". 14 of these seconds are used for construction the graph datastructure.
+  
 
   \section{Implementation details}
 
   \todo[inline]{How did you implement the solution? Which data structures were used? Which modifications to these data structures were used? What is the overall running time? Why?}
+  
+  We implemented a Node class and gave added members like; word (String), visited (Boolean), connected (List[Node]) and pred (Node). We also added methods for finding connected nodes etc. The entire script then first creates the graph and then runs BFS on it.
+  
+  The overall runtime for the program after some fine tuning is 36s. Creating the graph takes up about half of that time (with 5large1.in). Our method of creating the graph should be $O(n^2)$ and the BFS algorithm is $O(v+e)$, so we think that the algorithm should be faster than building the graph. We figured that it depends on how the graph looks.
 
 \end{document}
