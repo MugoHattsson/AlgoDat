@@ -25,9 +25,6 @@ class Node:
         self.visited = False
         self.pred: Node = None
 
-    def __str__(self):
-        return str(self.word)
-
     def __eq__(self, obj):
         return isinstance(obj, Node) and obj.word == self.word
 
