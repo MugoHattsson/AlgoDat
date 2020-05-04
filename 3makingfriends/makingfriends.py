@@ -3,13 +3,11 @@ from collections import deque
 from collections import defaultdict
 
 LINE = sys.stdin.readline().split(' ')
-N: int = int(LINE[0])
+# N: int = int(LINE[0])
 M: int = int(LINE[1])
-parent = dict()
+parent = defaultdict(int)
 
 def main():
-    for v in range(N):
-        parent[v+1] = v+1
     edges = buildEdges()
     # print(edges)
     print(kruskal(edges))
@@ -52,17 +50,22 @@ def kruskal(edges):
         parentV = find(v)
 
         if parentU != parentV:
-            parent[parentU] = parentV
+            if (parentU, parentV) == (u, v):
+                parent[u] = 0
+                parent[v] = parentU
+            parent[parentV] = parentU
             sum += w
 
     return sum
 
 
+
 def find(node):
     p = parent[node]
-    if p == node:
+    if p == 0:
         return node
-    p = find(p)
+    else:
+        return find(p)
 
 def buildEdges():
     edges = []
