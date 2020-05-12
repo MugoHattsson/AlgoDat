@@ -8,9 +8,15 @@ def main():
     px = sorted(P, key = lambda p: p[0])
     py = sorted(P, key = lambda p: p[1])
 
+    lx, rx = splitList(px)
+    limit = lx[-1][0]
+
+    ly = list(filter(lambda p: p[0] < limit, py))
+    ry = list(filter(lambda p: p[0] >= limit, py))
+
     print("%.6f" % closest(px, py, N))
     
-def closest(px, py, n):
+def closest(lx, rx, ly, ry, n):
     if n <= 3:
         shortest = float('inf')
         for p1 in px:
@@ -31,7 +37,6 @@ def closest(px, py, n):
         
         print("Kör algoritmen")
         delta = min(closest(lx, ly, len(lx)), closest(rx, ry, len(rx)))
-        #sy = list(filter(lambda p: p[0] >= (limit-delta) and p[0] <= (limit+delta), py))
 
         sy = list(filter(lambda p: abs(p[0] - limit) < delta, py))
 
