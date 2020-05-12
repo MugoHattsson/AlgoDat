@@ -24,18 +24,16 @@ def closest(px, py, n):
         lx, rx = splitList(px)
         limit = lx[-1][0]
 
-        print("Sorterar y listorna")
-        ly = sorted(lx, key = lambda p: p[0])
-        ry = sorted(rx, key = lambda p: p[1])
+        ly, ry = splitBy(limit, py)
         
-        print("Kör algoritmen")
+        #print("Kör algoritmen")
         delta = min(closest(lx, ly, len(lx)), closest(rx, ry, len(rx)))
-        #sy = list(filter(lambda p: p[0] >= (limit-delta) and p[0] <= (limit+delta), py))
-
         sy = list(filter(lambda p: abs(p[0] - limit) < delta, py))
-
+    
+        #size = len(sy)
         for i in range(len(sy)):
-            for j in range(i+1, i+15):
+            #for j in range(i+1, i+2):
+                j = i+1
                 if j < len(sy):
                     dist = distance(sy[i], sy[j])
                     if dist < delta:
@@ -43,6 +41,15 @@ def closest(px, py, n):
         
         return delta
 
+def splitBy(limit, py):
+    ly = []
+    ry = []
+    for p in py:
+        if p[0] < limit:
+            ly.append(p)
+        else:
+            ry.append(p)
+    return ly, ry
 
 def distance(p1, p2):
     dx = p2[0] - p1[0]
