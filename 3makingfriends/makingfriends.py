@@ -50,8 +50,7 @@ def buildEdges():
     return deque(sorted(edges, key=lambda edge: edge[2]))
 
 def createEdge():
-    #edgeTuple = lambda lst: ((lst[0], lst[1]), lst[2]) # [x,y,z] -> ((x,y),z)
-    return list(map(int, sys.stdin.readline().split(' ')))
+    return list(map(int, sys.stdin.readline().split(' '))) # [u,v,w]
 
 if __name__ == '__main__':
     main()
