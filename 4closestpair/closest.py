@@ -25,8 +25,9 @@ def closest(px, py, n):
         limit = lx[-1][0]
 
         print("Sorterar y listorna")
-        ly = sorted(lx, key = lambda p: p[0])
-        ry = sorted(rx, key = lambda p: p[1])
+
+        ly = list(filter(lambda p: p[0] < limit, py))
+        ry = list(filter(lambda p: p[0] >= limit, py))
         
         print("Kör algoritmen")
         delta = min(closest(lx, ly, len(lx)), closest(rx, ry, len(rx)))
