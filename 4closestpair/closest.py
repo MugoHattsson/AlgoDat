@@ -1,14 +1,15 @@
 import sys
 import math
 
+# time for i in {1..10}; do pypy closest.py < data/secret/6huger.in; done
 N = int(sys.stdin.readline().split(' ')[0])
 
 def main():
     P = readPoints()
     px = sorted(P, key = lambda p: p[0])
-    py = sorted(P, key = lambda p: p[1])
+    #py = sorted(P, key = lambda p: p[1])
 
-    print("%.6f" % closest(px, py, N))
+    print("%.6f" % closest(px, P, N))
     
 def closest(px, py, n):
     if n <= 3:
@@ -26,14 +27,12 @@ def closest(px, py, n):
 
         ly, ry = splitBy(limit, py)
         
-        #print("Kör algoritmen")
         delta = min(closest(lx, ly, len(lx)), closest(rx, ry, len(rx)))
         sy = list(filter(lambda p: abs(p[0] - limit) < delta, py))
     
-        #size = len(sy)
         for i in range(len(sy)):
-            #for j in range(i+1, i+2):
-                j = i+1
+            for j in range(i+1, i+15):
+                # j = i+1
                 if j < len(sy):
                     dist = distance(sy[i], sy[j])
                     if dist < delta:
