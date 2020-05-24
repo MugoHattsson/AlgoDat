@@ -20,8 +20,6 @@ def query():
 
 
 def alignments(query):
-    # print(query)
-    #global optMatrix
     s,t = query
     optMatrix = [[(-100,"") for _ in range(len(t))] for _ in range(len(s))]
 
@@ -40,7 +38,6 @@ def alignments(query):
                 key=lambda e: e[0]
             )
             optMatrix[i][j] = result
-            # print(result)
             
         return optMatrix[i][j]
 

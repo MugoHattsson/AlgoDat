@@ -29,17 +29,19 @@ def align(query):
     s,t = query
     i = len(s)-1
     j = len(t)-1
-    optMatrix = [[(-100,"") for _ in range(len(t))] for _ in range(len(s))]
-    # print(newOpt(i,j, (0,query)))
+    #optMatrix = [[(-100,"") for _ in range(len(t))] for _ in range(len(s))]
+    optMatrix = [[Alignment() for _ in range(len(t))] for _ in range(len(s))]
+
+    print(newOpt(i,j, (0,query)))
     print(optMatrix)
 
 
-# def newOpt(i, j, a):
-#     global optMatrix
+def newOpt(i, j):
+    global optMatrix
 
-#     optMatrix[i][j] = max(
-
-#     )
+    optMatrix[i][j] = max(
+        
+    , key=value)
 
 
 
@@ -61,11 +63,10 @@ class Alignment:
         self.w2 += b
         self.score += charScore(a, b)
 
-    def duplicateAdd(self, ali, a, b):
-        return (Alignment(self.w1, self.w2, self.score)).add(a, b)
-
     def setAlignment(self, ali, a, b):
-        self = ali
+        self.w1 = ali.w1
+        self.w2 = ali.w2
+        self.score = ali.score
         self.add(a, b)
     
     def value(self):

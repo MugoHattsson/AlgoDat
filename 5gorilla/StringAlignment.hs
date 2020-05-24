@@ -45,29 +45,29 @@ maximaBy f xs = filter ((maximum (map f xs) ==) . f) xs
 -- 2.d
 type AlignmentType = (String,String)     
         
-type OptEntry = (Int, [AlignmentType])
+type OptEntry = (Int, AlignmentType)
 
 showAlignment' :: AlignmentType -> String
 showAlignment' (a,b) = a ++ " " ++ b
 
 -- 2.e
 outputOptAlignments :: (String,String) -> (String, [[Int]]) -> IO ()
-outputOptAlignments (xs, ys) (chars,table) = putStrLn . showAlignment' $ head $ optAlignments' xs ys
+outputOptAlignments (xs, ys) (chars,table) = putStrLn . showAlignment' $ optAlignments' xs ys
 
     where 
-        optAlignments' :: String -> String -> [AlignmentType]
+        optAlignments' :: String -> String -> AlignmentType
         optAlignments' xs ys = snd $ optEntry (length xs) (length ys)
             where
                 optEntry i j = buildTable!!i!!j
                 buildTable = [[ makeEntry i j | j<-[0..]] | i<-[0..] ]
 
                 makeEntry :: Int -> Int -> OptEntry
-                makeEntry 0 0 = (0, [("","")])
+                makeEntry 0 0 = (0, ("",""))
                 makeEntry i 0 = updateEntry scoreSpace (xs!!(i-1))     '*'     $ optEntry (i-1) 0    
                 makeEntry 0 j = updateEntry scoreSpace     '*'     (ys!!(j-1)) $ optEntry 0 (j-1)   
-                makeEntry i j = (fst $ head result, concatMap snd result)  
+                makeEntry i j = result
                     where
-                        result = maximaBy fst [
+                        result = head $ maximaBy fst [
                                 updateEntry (charScore  x  y)  x  y  (optEntry (i-1) (j-1)),
                                 updateEntry (charScore '*' y) '*' y  (optEntry   i   (j-1)),
                                 updateEntry (charScore  x '*') x '*' (optEntry (i-1)   j)
@@ -86,8 +86,8 @@ outputOptAlignments (xs, ys) (chars,table) = putStrLn . showAlignment' $ head $ 
 
 
 -- Helper functions for optAlignments'
-attachTails :: a -> a -> [([a],[a])] -> [([a],[a])]
-attachTails t1 t2 aList = [(xs ++ [t1],ys ++ [t2]) | (xs,ys) <- aList]
+attachTails :: a -> a -> ([a],[a]) -> ([a],[a])
+attachTails t1 t2 (xs, ys) = (xs ++ [t1],ys ++ [t2])
 
 updateEntry :: Int -> Char -> Char -> OptEntry -> OptEntry
 updateEntry n t1 t2 (s,xs) = (s+n, attachTails t1 t2 xs)                
