@@ -14,10 +14,22 @@
 
   \section{Results}
 
-  \todo[inline]{Briefly comment the results, did the script say all your solutions were correct? Approximately how long time does it take for the program to run on the largest input? What takes the majority of the time?}
+  \todo[inline]{Briefly comment the results, did the script say all your solutions were correct? 
+                Approximately how long time does it take for the program to run on the largest input? 
+                What takes the majority of the time?}
+                
+                All solutions were correct.
+                4huge.in takes 5-6 seconds.
+                Building the OPT-matrix (a.k.a. scoreTable) takes the longest.
 
   \section{Implementation details}
 
-  \todo[inline]{How did you implement the solution? Which data structures were used? Which modifications to these data structures were used? What is the overall running time? Why?}
+  \todo[inline]{How did you implement the solution? 
+                Which data structures were used? Which modifications to these data structures were used? 
+                What is the overall running time? Why?}
 
+                At first we iterate over the strings and find the optimal alignment score, which is put into "scoreTable".
+                The algortithm then traverses scoreTable, from (m,n) to (0,0) and builds the optimal alignment strings.
+                Data structures that were use were python lists/matrices. They weren't modified.
+                The overall runningtime with the pypy compiler is about 7 seconds. (more than one minute with the normal compiler)
 \end{document}
