@@ -4,14 +4,15 @@ from collections import deque
 
 # N, M, C, P 
 N, M, C, P = map(int, sys.stdin.readline().rstrip().split(' '))
-print(N, M, C, P)
+nodes = []
+edges = [map(int, sys.stdin.readline().rstrip().split(' ')) for _ in range(M)]
+
 
 def main():
+    global nodes
 
     nodes = [Node(i) for i in range(N)]
-    edges = [map(int, sys.stdin.readline().rstrip().split(' ')) for _ in range(M)]
-
-    print(nodes)
+    
 
     # Building graph.
     for u,v,c in edges:
@@ -25,41 +26,55 @@ def main():
         sourceNode.addEdge(forwardEdge)
         sinkNode.addEdge(reverseEdge)
 
-    print(nodes)
+    print(nodes[0],nodes[-1])
+    result = maxFlow(nodes[0], nodes[-1])
+
 
     print("Done")
 
 def maxFlow(source, sink):
-    global nodes
     path = bfs(source, sink)
-    while not path: 
+    print("MF", path)
+    while len(path) > 0: 
         minCap = 9223372036854775807
         for edge in path:
-            if edge.cap < minCap:
-                minCap = edge.cap
+            if edge.capacityLeft() < minCap:
+                minCap = edge.capacityLeft()
 
         for edge in path:
             edge.flow += minCap
-            edge.opposite.cap = edge.flow
-            
+            edge.opposite.flow += minCap
+
+        path = bfs(source, sink)
+
+    return sum(e.flow for e in source.edges)
+
 
 
 def bfs(source, sink):
     if source == sink:
+        print("Basfall")
         return []
+    print("Sink:",sink)
 
     current_nodes = deque()
     current_nodes.append(source)
-    path = [source]
+    path = []
 
     while len(current_nodes) != 0:
         current = current_nodes.popleft()
-        for edge in current.edges():
+        for edge in current.edges:
             if not edge in path and not edge.opposite in path and edge.capacityLeft > 0: 
+                # print(edge)
                 path.append(edge)
+                # print(path)
                 current_nodes.append(nodes[edge.v])
+                print("CS: ", current, edge, sink)
                 if current == sink:
+                    print("hej")
                     return path
+    
+    print(path)
     return []
 
 class Node:
@@ -94,7 +109,7 @@ class Edge:
         self.flow += flw
 
     def __str__(self):
-        return str(self.u) + ", " + str(self.v) + ", " + str(self.flow) + "/" + str(self.cap)
+        return "E: (" + str(self.u) + ", " + str(self.v) + "), " + str(self.flow) + "/" + str(self.cap)
 
     def __repr__(self):
         return str(self)
