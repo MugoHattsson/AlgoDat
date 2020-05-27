@@ -14,10 +14,23 @@
 
   \section{Results}
 
-  \todo[inline]{Briefly comment the results, did the script say all your solutions were correct? Approximately how long time does it take for the program to run on the largest input? What takes the majority of the time?}
+  \todo[inline]{Briefly comment the results, did the script say all your solutions were correct? 
+                Approximately how long time does it take for the program to run on the largest input? 
+                What takes the majority of the time?}
+                All solutions are correct.
+                The largest input takes about 1m10s.
+                Narrowing down the problem to find the critical amount of edges to remove.
 
   \section{Implementation details}
 
-  \todo[inline]{How did you implement the solution? Which data structures were used? Which modifications to these data structures were used? What is the overall running time? Why?}
+  \todo[inline]{How did you implement the solution? 
+                Which data structures were used? 
+                Which modifications to these data structures were used? 
+                What is the overall running time? Why?}
+
+                Using a matrix where every index represents the remaining capacity of an edge. We have a binary 
+                search that narrows down the problem to find the critical amount of edges to remove. 
+                Datastructures used where arrays and queues. No modifications were done.
+                The overall running time is 1m20s. 
 
 \end{document}
