@@ -22,9 +22,9 @@ def align(s,t):
 
     # Finds the optimal alignment score
     scoreTable = [[-100 for _ in range(n+1)] for _ in range(m+1)]
-    for i in range(0,m):
+    for i in range(0,m+1):
         scoreTable[i][0] = i*delta
-    for j in range(0,n):
+    for j in range(0,n+1):
         scoreTable[0][j] = j*delta
 
     for i in range(1,m+1):
